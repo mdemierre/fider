@@ -111,7 +111,7 @@ func runMigration(ctx context.Context, version int, path, fileName string) error
 		return err
 	}
 
-	_, err = trx.Execute("INSERT INTO migrations_history (version, filename) VALUES ($1, $2)", version, fileName)
+	_, err = trx.Execute("INSERT INTO migrations_history (version, filename) VALUES (?, ?)", version, fileName)
 	if err != nil {
 		return err
 	}
@@ -123,7 +123,7 @@ func getLastMigration() (int, error) {
 	_, err := conn.Exec(`CREATE TABLE IF NOT EXISTS migrations_history (
 		version     BIGINT PRIMARY KEY,
 		filename    VARCHAR(100) null,
-		date	 			TIMESTAMPTZ NOT NULL DEFAULT NOW()
+		date	 			DATETIME NOT NULL DEFAULT NOW()
 	)`)
 	if err != nil {
 		return 0, err
