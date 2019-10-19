@@ -25,6 +25,33 @@ services:
     environment:
       POSTGRES_USER: fider_test
       POSTGRES_PASSWORD: fider_test_pw
+
+  mdbdev:
+    container_name: fider_mdbdev
+    restart: always
+    image: mariadb:10.4
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+    ports:
+      - "3333:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fider
+      MYSQL_USER: fider
+      MYSQL_PASSWORD: fider_pw
+
+  mdbdtest:
+    container_name: fider_mdbdtest
+    restart: always
+    image: mariadb:10.4
+    ports:
+      - "3334:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fider
+      MYSQL_USER: fider
+      MYSQL_PASSWORD: fider_test_pw
+
   s3test:
     container_name: fider_s3test
     restart: always
