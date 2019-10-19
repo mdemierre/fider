@@ -61,6 +61,14 @@
   version = "v1.5.0"
 
 [[projects]]
+  digest = "1:ec6f9bf5e274c833c911923c9193867f3f18788c461f76f05f62bb1510e0ae65"
+  name = "github.com/go-sql-driver/mysql"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "72cd26f257d44c1114970e19afddcd812016007e"
+  version = "v1.4.1"
+
+[[projects]]
   digest = "1:c6991fa57e45dbd4a062d408e34c601f1804d474e4eeb0f297e6841b21fc004c"
   name = "github.com/goenning/imagic"
   packages = ["."]
@@ -317,9 +325,10 @@
   version = "v0.3.2"
 
 [[projects]]
-  digest = "1:9cf45e754ab2dff5f53a553e6948b994ff738e4d1092ca608dcada945d8be0ef"
+  digest = "1:f40806967647e80fc51b941a586afefea6058592692c0bbfb3be7ea6b2b2a82d"
   name = "google.golang.org/appengine"
   packages = [
+    "cloudsql",
     "internal",
     "internal/base",
     "internal/datastore",
@@ -342,6 +351,7 @@
     "github.com/aws/aws-sdk-go/aws/session",
     "github.com/aws/aws-sdk-go/service/s3",
     "github.com/dgrijalva/jwt-go",
+    "github.com/go-sql-driver/mysql",
     "github.com/goenning/imagic",
     "github.com/goenning/letteravatar",
     "github.com/goenning/vat",

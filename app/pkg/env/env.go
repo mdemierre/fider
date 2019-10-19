@@ -24,6 +24,7 @@ type config struct {
 		URL string `env:"RENDERGUN_URL"`
 	}
 	Database struct {
+		Type         string `env:"DATABASE_TYPE,default=postgres"`
 		URL          string `env:"DATABASE_URL,required"`
 		MaxIdleConns int    `env:"DATABASE_MAX_IDLE_CONNS,default=2,strict"`
 		MaxOpenConns int    `env:"DATABASE_MAX_OPEN_CONNS,default=4,strict"`

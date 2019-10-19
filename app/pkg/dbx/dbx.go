@@ -15,6 +15,7 @@ import (
 	"github.com/getfider/fider/app/pkg/errors"
 	"github.com/getfider/fider/app/pkg/log"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/lib/pq"
 )
 
@@ -23,7 +24,7 @@ var rowMapper *RowMapper
 
 func init() {
 	var err error
-	conn, err = sql.Open("postgres", env.Config.Database.URL)
+	conn, err = sql.Open(env.Config.Database.Type, env.Config.Database.URL)
 	if err != nil {
 		panic(wrap(err, "failed to open connection to the database"))
 	}
@@ -290,10 +291,13 @@ func (trx *Trx) Rollback() error {
 }
 
 func wrap(err error, format string, a ...interface{}) error {
-	if pqErr, ok := err.(*pq.Error); ok {
-		if pqErr.Code == "57014" { //query canceled
-			return errors.Wrap(context.Canceled, format, a...)
+	if env.Config.Database.Type == "postgres" {
+		if pqErr, ok := err.(*pq.Error); ok {
+			if pqErr.Code == "57014" { //query canceled
+				return errors.Wrap(context.Canceled, format, a...)
+			}
 		}
 	}
+
 	return errors.Wrap(err, format, a...)
 }

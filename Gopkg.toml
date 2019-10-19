@@ -18,6 +18,10 @@ ignored = ["github.com/magefile/mage/mg","github.com/magefile/mage/sh"]
   name = "github.com/lib/pq"
 
 [[constraint]]
+  name = "github.com/go-sql-driver/mysql"
+  version = "^1.4.1"
+
+[[constraint]]
   name = "github.com/russross/blackfriday"
   version = "^1.5.2"
 
