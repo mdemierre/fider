@@ -22,7 +22,11 @@ var ErrNoChanges = stdErrors.New("nothing to migrate.")
 // Migrate the database to latest version
 func Migrate(ctx context.Context, path string) error {
 	log.Info(ctx, "Running migrations...")
-	dir, err := os.Open(env.Path(path))
+
+	// Load migrations for the selected DB type
+	dbPath := env.Path(path, env.Config.Database.Type)
+
+	dir, err := os.Open(dbPath)
 	if err != nil {
 		return errors.Wrap(err, "failed to open dir '%s'", path)
 	}
